@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameRoomServer", "GameRoomServer\GameRoomServer.csproj", "{A9FD4717-8355-49A8-8E86-6E09B0AAA16B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameRoomsAPI", "GameRoomsAPI\GameRoomsAPI.csproj", "{C214F0E2-3B6E-438D-8207-DB5BA146AAFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A9FD4717-8355-49A8-8E86-6E09B0AAA16B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9FD4717-8355-49A8-8E86-6E09B0AAA16B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A9FD4717-8355-49A8-8E86-6E09B0AAA16B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9FD4717-8355-49A8-8E86-6E09B0AAA16B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C214F0E2-3B6E-438D-8207-DB5BA146AAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C214F0E2-3B6E-438D-8207-DB5BA146AAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C214F0E2-3B6E-438D-8207-DB5BA146AAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C214F0E2-3B6E-438D-8207-DB5BA146AAFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
