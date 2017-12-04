@@ -160,6 +160,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ChatSocket.cs" />
+    <Compile Include="Helpers\GameState.cs" />
+    <Compile Include="Helpers\TTTSocket.cs" />
     <Compile Include="Helpers\UserContext.cs" />
     <Compile Include="Helpers\RoomContext.cs" />
     <Compile Include="Helpers\WebSocket.cs" />

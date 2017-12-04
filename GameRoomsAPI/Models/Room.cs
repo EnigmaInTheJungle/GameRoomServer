@@ -41,8 +41,9 @@ namespace GameRoomsAPI.Models
 
         public void StartServer(int id)
         {
-            WebSocket.WS.AddWebSocketService<ChatSocket>("/Room/" + id);
+            WebSocket.WS.AddWebSocketService<TTTSocket>("/Room/" + id);
             WebSocketUrl = "ws://localhost:8888/Room/" + id;
+            GameState.gameState.Add(id, new GameStateLocal());
         }
 
         public Room(string title, string imageUrl, int maxPlayers, string host)
