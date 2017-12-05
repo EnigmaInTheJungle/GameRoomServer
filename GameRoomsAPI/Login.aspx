@@ -13,7 +13,7 @@
             <h4 style="font-size: medium">Log In</h4>
          <hr />
          <asp:PlaceHolder runat="server" ID="LoginStatus" Visible="false">
-            <p>
+            <p> 
                <asp:Literal runat="server" ID="StatusText" />
             </p>
          </asp:PlaceHolder>
