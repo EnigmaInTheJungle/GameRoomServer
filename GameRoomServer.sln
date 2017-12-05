@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameRoomsAPI", "GameRoomsAPI\GameRoomsAPI.csproj", "{C214F0E2-3B6E-438D-8207-DB5BA146AAFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{84DA2D63-07FA-4CD7-80BB-D3D16371CD13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C214F0E2-3B6E-438D-8207-DB5BA146AAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C214F0E2-3B6E-438D-8207-DB5BA146AAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C214F0E2-3B6E-438D-8207-DB5BA146AAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84DA2D63-07FA-4CD7-80BB-D3D16371CD13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84DA2D63-07FA-4CD7-80BB-D3D16371CD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84DA2D63-07FA-4CD7-80BB-D3D16371CD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84DA2D63-07FA-4CD7-80BB-D3D16371CD13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
