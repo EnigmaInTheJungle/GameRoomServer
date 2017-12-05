@@ -22,13 +22,13 @@ namespace UnitTestProject
             Assert.AreEqual(result, IdentityResult.Success);
         }
 
-        [TestMethod]
-        public void TestCreateNewUserMethod()
-        {
-            var user = new Register();
-            IdentityResult result = user.CreateNewUser();
-            Assert.AreEqual(result, IdentityResult.Success);
-        }
+        //[TestMethod]
+        //public void TestCreateNewUserMethod()
+        //{
+        //    var user = new Register();
+        //    IdentityResult result = user.CreateNewUser();
+        //    Assert.AreEqual(result, IdentityResult.Success);
+        //}
 
         [TestMethod]
         public void TestLoginUser()
