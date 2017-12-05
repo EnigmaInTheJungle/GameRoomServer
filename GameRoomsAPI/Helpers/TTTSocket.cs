@@ -1,4 +1,5 @@
-﻿using GameRoomsAPI.Models;
+﻿using GameRoomsAPI.DAO;
+using GameRoomsAPI.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -12,6 +13,11 @@ namespace GameRoomsAPI.Helpers
 {
     public class TTTSocket : WebSocketBehavior
     {
+        public TTTSocket(int id)
+        {
+            _roomId = id;
+        }
+        RoomDao roomDao = new RoomDao();
         int _roomId = 0;
         public void playersMove(string player, int cellID)
         {
@@ -45,14 +51,12 @@ namespace GameRoomsAPI.Helpers
                     GameState.gameState[_roomId].whosNext += 1;
             }
         }
-
         public void resetBoard()
         {
             _roomId = Convert.ToInt32(Context.RequestUri.AbsolutePath.Split('/').Last());
             GameState.gameState[_roomId].whosNext = 0;
             GameState.gameState[_roomId].board = new int[]{ 0, 0, 0, 0, 0, 0, 0, 0, 0};
         }
-
         public void updateClientState()
         {
             _roomId = Convert.ToInt32(Context.RequestUri.AbsolutePath.Split('/').Last());
@@ -66,25 +70,16 @@ namespace GameRoomsAPI.Helpers
                 }));
             }
         }
-
-        
+     
         protected override void OnOpen()
         {
-            _roomId = Convert.ToInt32(Context.RequestUri.AbsolutePath.Split('/').Last());
-
-            Room room = null;
-            using (RoomContext db = new RoomContext())
-            {
-                room = db.Rooms.Where(c => c.Id == _roomId).FirstOrDefault();
-                room.AddUser("sds");
-                db.SaveChanges();
-            }
+            //_roomId = Convert.ToInt32(Context.RequestUri.AbsolutePath.Split('/').Last());
+            Room room = roomDao.AddUser(_roomId, null);      
             Sessions.Broadcast(JsonConvert.SerializeObject(new { type = "userJoined", players = room.CurrentPlayers }));
         }
 
         protected override void OnMessage(MessageEventArgs e)
         {
-            _roomId = Convert.ToInt32(Context.RequestUri.AbsolutePath.Split('/').Last());
             JToken token = JObject.Parse(e.Data);
             if((string)token.SelectToken("type") == "setupRequest")
             {
@@ -102,27 +97,17 @@ namespace GameRoomsAPI.Helpers
             {
                 playersMove((string)token.SelectToken("playerID"), (int)token.SelectToken("cellID"));
                 updateClientState();
-            }
-            
-            // Sessions.Broadcast(JsonConvert.SerializeObject(new { type = "messageSended", message = e.Data }));
+            }            
         }
 
         protected override void OnClose(CloseEventArgs e)
         {
-            _roomId = Convert.ToInt32(Context.RequestUri.AbsolutePath.Split('/').Last());
+            roomDao.RemoveUser(_roomId, null);
+            Room room = roomDao.Get(_roomId);
 
-            Room room = null;
-            using (RoomContext db = new RoomContext())
-            {
-                room = db.Rooms.Where(c => c.Id == _roomId).FirstOrDefault();
-                if (room != null)
-                {
-                    room.DeleteUser("sds");
-                    if (room.CurrentPlayers == 0)
-                        db.Rooms.Remove(room);
-                    db.SaveChanges();
-                }
-            }
+            if (room.CurrentPlayers == 0)
+                roomDao.Delete(_roomId);
+
             Sessions.Broadcast(JsonConvert.SerializeObject(new { type = "userJoined", players = room.CurrentPlayers }));
         }
 

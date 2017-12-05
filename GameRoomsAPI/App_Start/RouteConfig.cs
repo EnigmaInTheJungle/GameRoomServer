@@ -1,5 +1,8 @@
-﻿using GameRoomsAPI.Helpers;
+﻿using GameRoomsAPI.DAO;
+using GameRoomsAPI.DataBases.DAO;
+using GameRoomsAPI.Helpers;
 using GameRoomsAPI.Models;
+using GameRoomsAPI.WebSockets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +16,13 @@ namespace GameRoomsAPI
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            RoomDao roomDAO = new RoomDao();
+            UserDao userDao = new UserDao();
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             WebSocket.Start();
-            using (RoomContext db = new RoomContext())
-            {
-                db.Rooms.RemoveRange(db.Rooms);
-                db.SaveChanges();
-            }
+            WebSocket.WS.AddWebSocketService<UsersSocket>("/Users");
+            roomDAO.DeleteAll();
+            userDao.DeleteAll();
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

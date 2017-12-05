@@ -7,20 +7,35 @@ namespace GameRoomsAPI.Models
 {
     public class User
     {
-        static int count = 0;
-
         public int Id { get; set; }
         public string Name { get; set; }
+        public bool Online { get; set; }
+        public string SessionId { get; set; }
 
         public User()
         {
 
         }
 
-        public User(string name)
+        public User(User user)
+        {
+            Name = user.Name;
+            Online = user.Online;
+            SessionId = user.SessionId;
+        }
+
+        public void Update(User user)
+        {
+            Name = user.Name;
+            Online = user.Online;
+            SessionId = user.SessionId;
+        }
+
+        public User(string name, bool online, string sessionId)
         {
             Name = name;
-            Id = ++count;
+            Online = online;
+            SessionId = sessionId;
         }
     }
 }

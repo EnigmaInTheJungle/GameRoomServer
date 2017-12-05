@@ -27,13 +27,13 @@ namespace GameRoomsAPI.Models
 
         }
 
-        public void AddUser(string user)
+        public void AddUser(User user)
         {
             //_currentPlayers.Add(user);
             CurrentPlayers++;
         }
 
-        public void DeleteUser(string user)
+        public void DeleteUser(User user)
         {
             //_currentPlayers.Add(user);
             CurrentPlayers--;
@@ -41,17 +41,9 @@ namespace GameRoomsAPI.Models
 
         public void StartServer(int id)
         {
-            WebSocket.WS.AddWebSocketService<TTTSocket>("/Room/" + id);
+            WebSocket.WS.AddWebSocketService<TTTSocket>("/Room/" + id, () => new TTTSocket(Id));
             WebSocketUrl = "ws://localhost:8888/Room/" + id;
             GameState.gameState.Add(id, new GameStateLocal());
-        }
-
-        public Room(string title, string imageUrl, int maxPlayers, string host)
-        {
-            Title = title;
-            ImageUrl = imageUrl;
-            MaxPlayers = maxPlayers;
-            Host = host;       
         }
 
         public Room(Room room)

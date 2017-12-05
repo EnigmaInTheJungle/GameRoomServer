@@ -156,18 +156,21 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
+    <Compile Include="DataBases\DAO\RoomDao.cs" />
+    <Compile Include="DataBases\DAO\UserDao.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\ChatSocket.cs" />
     <Compile Include="Helpers\GameState.cs" />
     <Compile Include="Helpers\TTTSocket.cs" />
-    <Compile Include="Helpers\UserContext.cs" />
-    <Compile Include="Helpers\RoomContext.cs" />
+    <Compile Include="DataBases\Contexts\UserContext.cs" />
+    <Compile Include="DataBases\Contexts\RoomContext.cs" />
     <Compile Include="Helpers\WebSocket.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebSockets\Actions\UserActions.cs" />
+    <Compile Include="WebSockets\UsersSocket.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
