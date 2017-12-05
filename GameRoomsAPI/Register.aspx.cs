@@ -16,6 +16,11 @@ namespace GameRoomsAPI
         protected void CreateUser_Click(object sender, EventArgs e)
         {
             // Default UserStore constructor uses the default connection string named: DefaultConnection
+            CreateNewUser();
+        }
+
+        public IdentityResult CreateNewUser()
+        {
             var userStore = new UserStore<IdentityUser>();
             var manager = new UserManager<IdentityUser>(userStore);
             var user = new IdentityUser() { UserName = UserName.Text };
@@ -33,6 +38,7 @@ namespace GameRoomsAPI
             {
                 StatusMessage.Text = result.Errors.FirstOrDefault();
             }
+            return result;
         }
     }
 }

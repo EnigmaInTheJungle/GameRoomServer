@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameRoomsAPI", "GameRoomsAP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject", "UnitTestProject\UnitTestProject.csproj", "{84DA2D63-07FA-4CD7-80BB-D3D16371CD13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoTestProject", "AutoTestProject\AutoTestProject.csproj", "{18DB58C1-6C34-47FE-97F1-2D43CE9BF407}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{84DA2D63-07FA-4CD7-80BB-D3D16371CD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84DA2D63-07FA-4CD7-80BB-D3D16371CD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84DA2D63-07FA-4CD7-80BB-D3D16371CD13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18DB58C1-6C34-47FE-97F1-2D43CE9BF407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18DB58C1-6C34-47FE-97F1-2D43CE9BF407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18DB58C1-6C34-47FE-97F1-2D43CE9BF407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18DB58C1-6C34-47FE-97F1-2D43CE9BF407}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -31,6 +31,11 @@ namespace GameRoomsAPI
 
         protected void SignIn(object sender, EventArgs e)
         {
+            SignInUser();
+        }
+
+        public IdentityUser SignInUser()
+        {
             var userStore = new UserStore<IdentityUser>();
             var userManager = new UserManager<IdentityUser>(userStore);
             var user = userManager.Find(UserName.Text, Password.Text);
@@ -48,6 +53,7 @@ namespace GameRoomsAPI
                 StatusText.Text = "Invalid username or password.";
                 LoginStatus.Visible = true;
             }
+            return user;
         }
 
         protected void SignOut(object sender, EventArgs e)

@@ -23,6 +23,14 @@ namespace UnitTestProject
         }
 
         [TestMethod]
+        public void TestCreateNewUserMethod()
+        {
+            var user = new Register();
+            IdentityResult result = user.CreateNewUser();
+            Assert.AreEqual(result, IdentityResult.Success);
+        }
+
+        [TestMethod]
         public void TestLoginUser()
         {
             var userStore = new UserStore<IdentityUser>();
@@ -33,7 +41,18 @@ namespace UnitTestProject
             var userManager = new UserManager<IdentityUser>(userStore);
             var userLogin = userManager.Find("NewUser", "123abc");
             Assert.AreNotEqual(null, userLogin);
-
         }
+
+        //[TestMethod]
+        //public void TestLoginUserMethod()
+        //{
+        //    var user = new Login();
+        //    IdentityUser result = user.SignInUser();
+        //    Assert.AreNotEqual(null, result);
+
+        //}
+
+
+
     }
 }
