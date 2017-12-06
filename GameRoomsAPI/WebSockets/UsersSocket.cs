@@ -22,7 +22,6 @@ namespace GameRoomsAPI.WebSockets
             userDao.Create(newUser);
             BroadcastOnlineUsers();
         }
-
         protected override void OnMessage(MessageEventArgs e)
         {
             JToken token = JObject.Parse(e.Data);
@@ -31,17 +30,7 @@ namespace GameRoomsAPI.WebSockets
             if (actionType == UserActions.GET_ONLINE_USERS)
                 SendOnlineUsers();
 
-        }
-
-        private void SendOnlineUsers()
-        {
-            Send(JsonConvert.SerializeObject(new { type = "updateUsers", users = userDao.All().Where(p => p.Online)}));
-        }
-        private void BroadcastOnlineUsers()
-        {
-            Sessions.Broadcast(JsonConvert.SerializeObject(new { type = "updateUsers", users = userDao.All().Where(p => p.Online) }));
-        }
-
+        }     
         protected override void OnClose(CloseEventArgs e)
         {
             List<User> offlineUsers = new List<User>();
@@ -55,10 +44,17 @@ namespace GameRoomsAPI.WebSockets
             }
             BroadcastOnlineUsers();
         }
-
         protected override void OnError(ErrorEventArgs e)
         {          
             base.OnError(e);
+        }
+        private void SendOnlineUsers()
+        {
+            Send(JsonConvert.SerializeObject(new { type = UserActions.UPDATE_USERS, users = userDao.All().Where(p => p.Online) }));
+        }
+        private void BroadcastOnlineUsers()
+        {
+            Sessions.Broadcast(JsonConvert.SerializeObject(new { type = UserActions.UPDATE_USERS, users = userDao.All().Where(p => p.Online) }));
         }
     }
 }

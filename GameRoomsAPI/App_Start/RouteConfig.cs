@@ -14,13 +14,14 @@ namespace GameRoomsAPI
 {
     public class RouteConfig
     {
+        static RoomDao roomDAO = new RoomDao();
         public static void RegisterRoutes(RouteCollection routes)
-        {
-            RoomDao roomDAO = new RoomDao();
+        {         
             UserDao userDao = new UserDao();
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             WebSocket.Start();
             WebSocket.WS.AddWebSocketService<UsersSocket>("/Users");
+            WebSocket.WS.AddWebSocketService<RoomsSocket>("/Rooms", () => new RoomsSocket(roomDAO));
             roomDAO.DeleteAll();
             userDao.DeleteAll();
             routes.MapRoute(

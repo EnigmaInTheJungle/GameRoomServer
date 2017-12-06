@@ -9,6 +9,9 @@ namespace GameRoomsAPI.DAO
 {
     public class RoomDao
     {
+        public event Action RoomDeleted;
+        public event Action PlayersNumberChanged;
+
         public List<Room> All()
         {
             List<Room> rooms = null;
@@ -53,8 +56,9 @@ namespace GameRoomsAPI.DAO
                 Room deletedRoom = db.Rooms.Where(c => c.Id == id).FirstOrDefault();
                 returnedRoom = deletedRoom;
                 db.Rooms.Remove(deletedRoom);
-                db.SaveChanges();
+                db.SaveChanges();          
             }
+            //RoomDeleted();
             return returnedRoom;
         }
 
@@ -84,8 +88,9 @@ namespace GameRoomsAPI.DAO
             {
                 room = db.Rooms.Where(c => c.Id == id).FirstOrDefault();
                 room.AddUser(user);
-                db.SaveChanges();
+                db.SaveChanges();                
             }
+            //PlayersNumberChanged();
             return room;
         }
 
@@ -96,8 +101,9 @@ namespace GameRoomsAPI.DAO
             {
                 room = db.Rooms.Where(c => c.Id == id).FirstOrDefault();
                 room.DeleteUser(user);
-                db.SaveChanges();
+                db.SaveChanges();               
             }
+            //PlayersNumberChanged();
             return room;
         }
     }
