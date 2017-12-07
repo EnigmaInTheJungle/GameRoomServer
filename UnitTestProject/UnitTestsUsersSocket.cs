@@ -31,14 +31,21 @@ namespace UnitTestProject
         }
 
         [TestMethod]
+        public void TestUsersSocketStateConnecting()
+        {
+            var us = new UsersSocket();
+            Assert.AreEqual(WebSocketState.Connecting, us.State);
+        }
+
+        [TestMethod]
         public void TestMethodWebSocketWithService()
         {
             var us = new UsersSocket();
             var ws = new WebSocket("ws://localhost:4649");
-            ws.OnOpen += (sender, e) => ws.Send("Hi, there!");
+            //ws.OnOpen += (sender, e) => ws.Send("Hi, there!");
             ws.Connect();
-            
-            Assert.AreEqual(true, wssv.IsListening);
+            ws.Ping("msg");
+            Assert.AreEqual(true, ws.ReadyState);
         }
     }
 }
