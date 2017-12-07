@@ -3,6 +3,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GameRoomsAPI.WebSockets;
 using WebSocketSharp;
 using WebSocketSharp.Server;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using GameRoomsAPI.WebSockets.Actions;
+using GameRoomsAPI.DataBases.DAO;
+using System.Linq;
 
 namespace UnitTestProject
 {
@@ -38,18 +43,52 @@ namespace UnitTestProject
         }
 
         [TestMethod]
-        public void TestMethodWebSocketWithService()
+        public void TestMethodWebSocketWithClient()
         {
             var ws = new WebSocket("ws://localhost:4649/UsersSocket");
             string getMsg = "";
             ws.OnOpen += (sender, e) => ws.Send("Hi, there!");
-            ws.OnMessage += (sender, e) => getMsg = e.ToString();
+            ws.OnMessage += (sender, e) => getMsg = e.Data;
             ws.Connect();
             
             ws.Ping("ping");
             ws.Send("msg");
 
             Assert.AreEqual("", getMsg);
+        }
+
+        [TestMethod]
+        public void TestMethodWebSocketGetUsers()
+        {
+            var ws = new WebSocket("ws://localhost:4649/UsersSocket");
+            string getMsg = "";
+            ws.OnOpen += (sender, e) => ws.Send("Hi, there!");
+            ws.OnMessage += (sender, e) => getMsg = e.Data;
+            ws.Connect();
+
+            ws.Ping("ping");
+
+            UserDao userDao = new UserDao();
+            ws.Send(JsonConvert.SerializeObject(new { type = UserActions.GET_ONLINE_USERS }));
+
+            Assert.AreEqual("", getMsg);
+        }
+
+        [TestMethod]
+        public void TestMethodWebSocketSendMsg()
+        {
+            var ws = new WebSocket("ws://localhost:4649/UsersSocket");
+            string getMsg = "";
+            ws.OnOpen += (sender, e) => ws.Send("Hi, there!");
+            ws.OnMessage += (sender, e) => getMsg = e.Data;
+            ws.Connect();
+
+            ws.Ping("ping");
+
+            UserDao userDao = new UserDao();
+            ws.Send(JsonConvert.SerializeObject(new { type = UserActions.UPDATE_USERS, users = userDao.All().Where(p => p.Online) }));
+
+            Assert.AreEqual("{}", getMsg);
         }
     }
 }
