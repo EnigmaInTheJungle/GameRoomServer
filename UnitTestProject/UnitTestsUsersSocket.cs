@@ -40,12 +40,16 @@ namespace UnitTestProject
         [TestMethod]
         public void TestMethodWebSocketWithService()
         {
-            var us = new UsersSocket();
-            var ws = new WebSocket("ws://localhost:4649");
-            //ws.OnOpen += (sender, e) => ws.Send("Hi, there!");
+            var ws = new WebSocket("ws://localhost:4649/UsersSocket");
+            string getMsg = "";
+            ws.OnOpen += (sender, e) => ws.Send("Hi, there!");
+            ws.OnMessage += (sender, e) => getMsg = e.ToString();
             ws.Connect();
-            ws.Ping("msg");
-            Assert.AreEqual(true, ws.ReadyState);
+            
+            ws.Ping("ping");
+            ws.Send("msg");
+
+            Assert.AreEqual("", getMsg);
         }
     }
 }
